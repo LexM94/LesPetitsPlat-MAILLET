@@ -1,0 +1,279 @@
+body {
+  font-family: 'Manrope', sans-serif!important;
+  background-color: #EAEAEA!important;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Anton', sans-serif!important;
+}
+
+.title {
+    padding: 30px;
+}
+
+.subtitle {
+  color: #7A7A7A;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.desc {
+  color: #1B1B1B;
+}
+
+.container-fluid {
+    height: 75vh;
+    background-image: url(f90e7bb5ff2950597c1f7f1fce40bd5b03a3d836.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.text-main {
+    font-size: 44px;
+    font-family: 'Anton';
+    font-weight: 400;
+    color: #FFD15B;
+    text-align: center;
+}
+
+.input-group {
+    margin: 0 auto;
+    width: 950px!important;
+    height: 72px!important;
+}
+
+.input-group-text {
+    background-color: #1B1B1B!important;
+    width: 52px;
+    height: 52px;
+    border-radius: 10px!important;
+    margin-left: -70px!important;
+    margin-top: 10px;
+    z-index: 1000;
+    cursor: pointer;
+}
+
+.input-group-text:hover {
+  background-color: #FFD15B !important;
+  cursor: pointer;
+}
+
+.input-group .form-control, .input-group .form-select {
+    border-top-right-radius: 10px !important;
+    border-bottom-right-radius: 10px !important;
+  }
+
+.fa-search {
+    color: #FFFFFF!important;
+    padding-left: 5px!important;
+    }
+
+.main {
+    display: flex;
+    justify-content: center;      
+    align-items: center;          
+    flex-direction: column;       
+    height: 60vh;               
+    margin: 0 auto;    
+    gap: 40px;      
+  }
+
+  .filters {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    width: 80%;
+    margin: 0 auto;
+    padding: 17px;
+    gap: 60px;
+  }
+
+  #recipe-count {
+  font-family: 'Anton', sans-serif!important;
+  font-weight: 400;
+  font-size: 21px;
+  margin-left: auto;
+  margin-right: 6rem;
+}
+
+  .dropdown-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px;
+    border-style: none!important;
+    width: 179px;
+    height: 56px;
+    border-radius: 10px;
+    background-color: #FFFFFF;
+  }
+
+  .dropdown-item:hover {
+    background-color: #FFD15B !important;
+  }
+
+  #recipes-container {
+    display: grid;
+    width: 80%;
+    margin: 0 auto;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 50px;
+    padding: 20px;
+}
+
+  .recipes-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    padding: 2rem;
+  }
+  
+  .recipe-card {
+    background: #fff;
+    width: 380px;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .recipe-card-img {
+    position: relative;
+    height: 250px;
+    overflow: hidden;
+  }
+  
+  .recipe-card-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  .recipe-card-time {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: #ffd15b;
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-weight: bold;
+    font-size: 0.9rem;
+  }
+  
+  .recipe-card-body {
+    padding: 1rem;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  
+  .recipe-card-title {
+    font-size: 1.4rem;
+    margin-bottom: 1rem;
+  }
+  
+  .recipe-card-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+  
+  .recipe-card-ingredients {
+    display: grid;
+    grid-template-rows: repeat(3, auto); /* 3 lignes automatiques */
+    grid-template-columns: repeat(2, 1fr); /* 2 colonnes */
+    grid-auto-flow: column; /* rempli colonne par colonne */
+    font-size: 14px;
+  }
+  
+  .recipe-card-description {
+    width: 100%;
+    font-size: 0.85rem;
+    color: #666;
+  }
+
+  .autocomplete-list {
+    position: absolute;
+    background: white;
+    margin-top: 60px;
+    margin-right: 1px;
+    border: 1px solid #ccc;
+    z-index: 10;
+    max-height: 200px;
+    overflow-y: auto;
+    border: none;
+    width: 950px!important;
+    border-radius: 10px!important;
+    }
+  
+  .autocomplete-item {
+    padding: 10px;
+    cursor: pointer;
+  }
+  
+  .autocomplete-item:hover {
+    background-color: #f0f0f0;
+  }
+  
+/* Style de base pour les dropdowns */
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-menu {
+  display: none; /* Par défaut, le menu est caché */
+  position: absolute;
+  background-color: #FFFFFF;
+  width: 179px;
+  border-width: 0px !important;
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+  max-height: 300px; /* adapte la hauteur selon ton besoin */
+  overflow-y: auto;  /* permet de défiler verticalement */
+}
+
+.dropdown-item {
+  padding: 8px 16px;
+  cursor: pointer;
+  text-transform: capitalize;
+}
+
+.dropdown-item:hover {
+  background-color: #ddd;
+}
+
+.dropdown.show .dropdown-menu {
+  display: block; /* Le menu devient visible lorsqu'il a la classe 'show' */
+}
+
+#selected-tags {
+  display: flex;
+  flex-direction: row;
+  gap: 40px;
+  width: 80%;
+  margin: 0 auto;
+  text-transform: capitalize;
+}
+
+.tag {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  width: 200px;
+  height: 53px;
+  background-color: #FFD15B;
+}
+
+.delete-tag {
+  color: #1B1B1B;
+  font-size: large;
+  border: none;
+  background-color: #FFD15B;
+}
