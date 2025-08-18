@@ -9,23 +9,37 @@ function updateRecipesCount(count) {
 // Fonction pour gérer la recherche et les suggestions
 function createAutocompleteSuggestions(query) {
   const list = document.getElementById('autocomplete-list');
-  list.innerHTML = ''; // Vide la liste des suggestions à chaque nouvelle entrée
+  list.innerHTML = '';
 
-  const searchTerms = query.toLowerCase().split(/\s+/); // ['mot clé', 'mot clé']
+  const searchTerms = query.toLowerCase().split(/\s+/);
+  const suggestions = [];
 
-  // Filtrage des recettes selon la recherche
-  const suggestions = recipes.filter(recipe => {
-    const textContent = [
-      recipe.name,
-      recipe.description,
-      ...recipe.ingredients.map(ing => ing.ingredient)
-    ].join(' ').toLowerCase();
+  // --- Remplace recipes.filter ---
+  for (let i = 0; i < recipes.length; i++) {
+    const recipe = recipes[i];
 
-    // Vérifie que chaque mot-clé de recherche est présent dans le texte de la recette
-    return searchTerms.every(term => textContent.includes(term));
-  });
+    // Construire le texte comme dans ta version fonctionnelle
+    let textContent = recipe.name + " " + recipe.description;
+    for (let j = 0; j < recipe.ingredients.length; j++) {
+      textContent += " " + recipe.ingredients[j].ingredient;
+    }
+    textContent = textContent.toLowerCase();
 
-  // Si aucune suggestion n'est trouvée
+    // Vérifier que tous les termes de recherche sont présents
+    let allTermsPresent = true;
+    for (let k = 0; k < searchTerms.length; k++) {
+      if (!textContent.includes(searchTerms[k])) {
+        allTermsPresent = false;
+        break;
+      }
+    }
+
+    if (allTermsPresent) {
+      suggestions.push(recipe);
+    }
+  }
+
+  // --- Affichage ---
   if (suggestions.length === 0) {
     const item = document.createElement('div');
     item.classList.add('autocomplete-item');
@@ -34,34 +48,27 @@ function createAutocompleteSuggestions(query) {
     return;
   }
 
-  // Afficher les suggestions dans le dropdown
-  suggestions.forEach(recipe => {
+  for (let i = 0; i < suggestions.length; i++) {
+    const recipe = suggestions[i];
     const item = document.createElement('div');
     item.classList.add('autocomplete-item');
     item.textContent = recipe.name;
 
     item.addEventListener('click', () => {
-      // Lorsqu'on clique sur une recette, on la sélectionne et on met à jour l'affichage
-      document.querySelector('.form-control').value = recipe.name; // Remplit le champ de recherche avec le nom de la recette
-      list.innerHTML = ''; // Vide la liste des suggestions
-
-      // Affiche la recette sélectionnée
-      displayRecipes([recipe]); // Affiche uniquement la recette sélectionnée
-      updateRecipesCount(1); // Affiche 1 recette sélectionnée
+      document.querySelector('.form-control').value = recipe.name;
+      list.innerHTML = '';
+      displayRecipes([recipe]);
+      updateRecipesCount(1);
     });
 
     list.appendChild(item);
-  });
+  }
 
-  // Mise à jour du nombre de recettes affichées
   updateRecipesCount(suggestions.length);
-
-  // Afficher toutes les recettes filtrées
   displayRecipes(suggestions);
-
-  // Mise à jour des dropdowns (si nécessaire)
   updateDropdowns(suggestions);
 }
+
 
 document.querySelector('.form-control').addEventListener('input', (e) => {
   const value = e.target.value.trim(); // Récupère la valeur de la barre de recherche
