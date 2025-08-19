@@ -17,7 +17,6 @@ function createAutocompleteSuggestions(query) {
   const suggestions = recipes.filter(recipe => {
     const textContent = [
       recipe.name,
-      recipe.description,
       ...recipe.ingredients.map(ing => ing.ingredient)
     ].join(' ').toLowerCase();
 
@@ -67,25 +66,20 @@ document.querySelector('.form-control').addEventListener('input', (e) => {
   const value = e.target.value.trim(); // Récupère la valeur de la barre de recherche
 
   if (value.length >= 3) {
-    createAutocompleteSuggestions(value); // Crée des suggestions si la recherche contient plus de 3 caractères
+    createAutocompleteSuggestions(value); // Crée des suggestions si la recherche contient au moins 3 caractères
   } else {
-    document.getElementById('autocomplete-list').innerHTML = ''; // Vide les suggestions si moins de 3 caractères
+    document.getElementById('autocomplete-list').innerHTML = ''; // Vide les suggestions
 
-    // Si la barre de recherche est vide, affiche toutes les recettes
     if (value === "") {
-      displayRecipes(recipes); // Affiche toutes les recettes
-      updateRecipesCount(recipes.length); // Met à jour le nombre de recettes
-    } else {
-      // Affiche toutes les recettes filtrées en fonction de la recherche
-      createAutocompleteSuggestions(value);
+      // Si la barre de recherche est vide, affiche toutes les recettes
+      displayRecipes(recipes);
+      updateRecipesCount(recipes.length);
+      updateDropdowns(recipes);
     }
-
-    updateDropdowns(recipes); // Réinitialise les dropdowns avec toutes les recettes
-
-    // Réinitialiser le compteur à toutes les recettes si la recherche est vide
-    updateRecipesCount(recipes.length);
+    // 👉 sinon, si moins de 3 caractères (et pas vide), on ne fait rien
   }
 });
+
 
 
 // Initialisation des recettes lorsque la page est chargée
