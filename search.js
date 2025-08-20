@@ -6,10 +6,7 @@ function updateRecipesCount(count) {
   }
 }
 
-// Fonction pour gérer la recherche et les suggestions
-function createAutocompleteSuggestions(query) {
-  const list = document.getElementById('autocomplete-list');
-  list.innerHTML = ''; // Vide la liste des suggestions à chaque nouvelle entrée
+function getRecipes(query,recipes) {
 
   const searchTerms = query.toLowerCase().split(/\s+/); // ['mot clé', 'mot clé']
 
@@ -23,6 +20,17 @@ function createAutocompleteSuggestions(query) {
     // Vérifie que chaque mot-clé de recherche est présent dans le texte de la recette
     return searchTerms.every(term => textContent.includes(term));
   });
+  return suggestions
+}
+
+// Fonction pour gérer la recherche et les suggestions
+function createAutocompleteSuggestions(query) {
+  const list = document.getElementById('autocomplete-list');
+  list.innerHTML = ''; // Vide la liste des suggestions à chaque nouvelle entrée
+
+
+  // Filtrage des recettes selon la recherche
+  const suggestions = getRecipes(query,recipes)
 
   // Si aucune suggestion n'est trouvée
   if (suggestions.length === 0) {
